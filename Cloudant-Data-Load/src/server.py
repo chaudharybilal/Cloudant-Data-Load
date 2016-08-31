@@ -13,8 +13,8 @@ from cloudant.client import Cloudant
 # Cloudant main #
 #################
 
-cloudant_username = "4d6e468f-cf33-4811-b42a-bcdc8c6659aa-bluemix"
-cloudant_password = "1d9cb4172eaf56fac73a4c623aed063df03fd2f3908a50d1b883b78a89434a83"
+cloudant_username = "4592de08-a7f2-45f0-b7c3-ba2e4aea8a1d-bluemix"
+cloudant_password = "d2812eba5313f3954742bd081162d283b0b6b9b6bd2849797c8cb2755722ffd2"
 cloudant_dbName = "python_test3"
 db_ip = "9.3.33.74"
 db_port = "1433"
