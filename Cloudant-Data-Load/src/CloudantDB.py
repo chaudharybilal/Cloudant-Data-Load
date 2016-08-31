@@ -88,9 +88,10 @@ def dataFetch(ip,port,db,tbl,cols,uid,pwd,client,cdb):
                     job = job + ' "' + columnList[num] + '": "' + str(row[num]) + '",'
             job = job + '}'   
             
-            #print job
+            #print json.loads(job)
             
-            databasePointer.create_document(json.loads(job))
+            my_data = databasePointer.create_document(json.loads(job))
+            #databasePointer.create_document(job)
         except Exception as e:
                 logging.error(str(e))
                 
