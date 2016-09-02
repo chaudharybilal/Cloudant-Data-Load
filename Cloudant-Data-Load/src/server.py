@@ -15,11 +15,11 @@ from cloudant.client import Cloudant
 
 cloudant_username = "4592de08-a7f2-45f0-b7c3-ba2e4aea8a1d-bluemix"
 cloudant_password = "d2812eba5313f3954742bd081162d283b0b6b9b6bd2849797c8cb2755722ffd2"
-cloudant_dbName = "python_test3"
-db_ip = "9.3.33.74"
+cloudant_dbName = "bluktest"
+db_ip = "9.51.101.173"
 db_port = "1433"
-db_name = "OAP_SD"
-db_table = "OAP_SD.dbo.CloudantTest"
+db_name = "BMO"
+db_table = "BMO.dbo.dump_data"
 cols = ["*"]
 db_usr = "sa"
 db_pas = "passw0rd!"
@@ -31,6 +31,7 @@ db_pas = "passw0rd!"
 
 def CreateDB(client, databaseName):
     client.connect() 
+    
     try:
                
         data = client[databaseName]
@@ -83,17 +84,23 @@ def dataFetch(ip,port,db,tbl,cols,uid,pwd,client,cdb):
             job = '{'
             for num in range(0,len(row)):
                 if num == len(row) - 1:
-                    job = job + ' "' + columnList[num] + '": "' + str(row[num]) + '"'
+                    job = job + ' "' + columnList[num] + '": "' + str(row[num]).replace("\t"," ").replace("\n"," ").replace("\r"," ").replace(":"," ").replace(";"," ").replace("'"," ").replace('"'," ").replace('\\'," ").replace('/'," ").decode('utf-8','ignore').encode("utf-8") + '"'
                 else:
-                    job = job + ' "' + columnList[num] + '": "' + str(row[num]) + '",'
+                    job = job + ' "' + columnList[num] + '": "' + str(row[num]).replace("\t"," ").replace("\n"," ").replace("\r"," ").replace(":"," ").replace(";"," ").replace("'"," ").replace('"'," ").replace('\\'," ").replace('/'," ").decode('utf-8','ignore').encode("utf-8") + '",'
             job = job + '}'   
             
             #print json.loads(job)
-            
+            #print job
+            json.loads(job)
+            #print json.loads(str('DQM ').encode("utf-8"))
             my_data = databasePointer.create_document(json.loads(job))
+            #databasePointer.bulk_docs()
             #databasePointer.create_document(job)
         except Exception as e:
                 logging.error(str(e))
+                print job
+                
+                
                 
    
     cur.close()
@@ -104,7 +111,7 @@ def main(argv):
     try:
         client = Cloudant(cloudant_username, cloudant_password, account=cloudant_username)
        
-        CreateDB(client,'python_test3')
+        CreateDB(client,cloudant_dbName)
         
         dataFetch(db_ip,db_port,db_name,db_table,cols,db_usr,db_pas,client,cloudant_dbName)
         
