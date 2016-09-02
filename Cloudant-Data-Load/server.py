@@ -17,10 +17,10 @@ cloudant_username = "4592de08-a7f2-45f0-b7c3-ba2e4aea8a1d-bluemix"
 cloudant_password = "d2812eba5313f3954742bd081162d283b0b6b9b6bd2849797c8cb2755722ffd2"
 cloudant_dbName = "bluktest"
 db_ip = "9.51.101.173"
-db_port = "1433"
+db_port = "1433" 
 db_name = "BMO"
 db_table = "BMO.dbo.dump_data"
-cols = ["*"]
+cols = ["*"] 
 db_usr = "sa"
 db_pas = "passw0rd!"
 
